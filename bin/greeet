@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+
+options = {}
+
+prog_name = File.basename(__FILE__)
+desc      = "Print simple greetings"
+version   = File.read(File.expand_path('../VERSION', File.dirname(__FILE__)))
+banner    = <<EOL
+Usage: #{prog_name} [options] NAME
+
+#{desc}
+
+v#{version}
+
+Options:
+EOL
+
+option_parser = OptionParser.new do |opts|
+  opts.banner = banner
+  opts.on("-h", "--help") do
+    puts opts
+    exit 0
+  end
+  opts.on("--version") do
+    puts "#{prog_name} version #{version}"
+    exit 0
+  end
+end
+
+begin
+  option_parser.parse!
+  if ARGV.empty?
+    STDERR.puts "error: NAME is required!"
+    STDERR.puts option_parser
+    exit 1
+  end
+rescue OptionParser::InvalidOption => ex
+  STDERR.puts ex.message
+  STDERR.puts option_parser
+  exit 1
+end
+
+puts "hello #{ARGV[0]}"
