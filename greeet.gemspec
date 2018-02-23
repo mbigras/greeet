@@ -9,5 +9,5 @@ Gem::Specification.new do |s|
                   %w(greeet.gemspec LICENSE.txt README.txt VERSION)
   s.homepage    = 'https://github.com/mbigras/greeet'
   s.bindir      = 'bin'
-  s.executables << 'greet'
+  s.executables << 'greeet'
 end
